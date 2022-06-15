@@ -37,7 +37,7 @@ int mergeSort(vector<int>& A, vector<int>& temp, int left, int right)
     int mid, inv_count = 0;
     if(left < right)
     {
-        mid = (right+left/2);
+        mid = (right+left)/2;
         inv_count += mergeSort(A, temp, left, mid);
         inv_count += mergeSort(A, temp, mid+1, right);
         inv_count += merge(A, temp, left, mid+1, right);
