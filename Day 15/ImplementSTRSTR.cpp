@@ -1,10 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
+// O(N-M)
 // INT_MAX is used as prime number to avoid collision
+
+/* steps:
+1. Max power calculation => 256^(m-1)
+2. Pattern hash calculation, first window of txt
+3. i=0, i<n-m, if hash matches, character match, if matched return true
+4. leading digit delete, current digit added
+
+*/
 void search(string pat, string txt, int INT_MAX)
 {
-    int M = strlen(pat);
+    int M = strlen(pat); 
     int N = strlen(txt);
     int i, j;
     int hashPat = 0; // hash value for pattern
@@ -17,7 +25,7 @@ void search(string pat, string txt, int INT_MAX)
  
     // Calculate the hash value of pattern and first
     // window of text
-    for (i = 0; i < M; i++)
+    for(i = 0; i < M; i++)
     {
         hashPat = (256 * hashPat + pat[i]) % INT_MAX;
         hashTxt = (256 * hashTxt + txt[i]) % INT_MAX;
@@ -30,7 +38,7 @@ void search(string pat, string txt, int INT_MAX)
         // Check the hash values of current window of text
         // and pattern. If the hash values match then only
         // check for characters one by one
-        if ( hashPat == hashTxt )
+        if(hashPat == hashTxt)
         {  
             /* Check for characters one by one */
             for (j = 0; j < M; j++)
@@ -49,9 +57,9 @@ void search(string pat, string txt, int INT_MAX)
  
         // Calculate hash value for next window of text: Remove
         // leading digit, add trailing digit
-        if ( i < N-M )
+        if (i< N-M )
         {
-            hashTxt = (256*(hashTxt - txt[i]*h) + txt[i+M])%INT_MAX;
+            hashTxt = (256*(hashTxt - txt[i]*h) + txt[i+M])%INT_MAX; // leading character deleted
             // We might get negative value of t, converting it
             // to positive
             if (hashTxt < 0)
