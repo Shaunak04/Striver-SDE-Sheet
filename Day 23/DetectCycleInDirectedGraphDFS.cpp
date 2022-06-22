@@ -18,7 +18,7 @@ public:
         return false;
     }
     
-    bool canFinish(int V, vector<vector<int>>& adj) 
+    bool cycleInGraph(int V, vector<vector<int>>& adj) 
     {
         bool vis[V];
         bool dfsvis[V];
@@ -36,10 +36,10 @@ public:
             {
                 if(checkCycle(i, graph, vis, dfsvis))
                 {
-                    return false;
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 };
