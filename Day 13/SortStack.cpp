@@ -11,7 +11,7 @@ void sortedInsert(stack<int> &stack, int key)
     sortedInsert(stack, key);
     stack.push(top);
 }
- 
+
 void sortstack(stack<int> &stack)
 {
     if(stack.empty()) 
