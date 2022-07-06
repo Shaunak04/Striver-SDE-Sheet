@@ -1,33 +1,33 @@
-vector < int > inorderTraversal(node * root) 
+vector<int> inorderTraversal(node * root) 
 {
-  vector < int > inorder;
+  vector<int> inorder;
 
-  node * cur = root;
-  while (cur != NULL) 
+  node* cur = root;
+  while(cur!=NULL) 
   {
-    if (cur -> left == NULL) // case1
+    if(cur->left == NULL) // case1
     {
-      inorder.push_back(cur -> data);
-      cur = cur -> right;
+      inorder.push_back(cur->data);
+      cur = cur->right;
     } 
     else 
     {
-      node * prev = cur -> left;
-      while (prev -> right != NULL && prev -> right != cur) 
+      node* prev=cur->left;
+      while(prev->right!=NULL && prev->right!=cur) 
       {
-        prev = prev -> right;
+        prev = prev->right;
       }
 
-      if (prev -> right == NULL) // case 2
+      if(prev->right==NULL) // case 2
       {
-        prev -> right = cur;
-        cur = cur -> left;
+        prev->right=cur;
+        cur = cur->left;
       } 
       else // case 3 
       {
-        prev -> right = NULL;
-        inorder.push_back(cur -> data);
-        cur = cur -> right;
+        prev->right = NULL;
+        inorder.push_back(cur->data);
+        cur = cur->right;
       }
     }
   }
