@@ -1,14 +1,14 @@
 class Solution {
   public:
   
-    bool checkCycle(int node, bool vis[], vector<int> adj[], int parent)
+    bool foundCycle(int node, bool vis[], vector<int> adj[], int parent)
     {
         vis[node] = true;
         for(auto it:adj[node])
         {
             if(!vis[it])
             {
-                if(checkCycle(it, vis, adj, node)) return true;
+                if(foundCycle(it, vis, adj, node)) return true;
             }
             else if(it!=parent) return true;
         }
@@ -24,7 +24,7 @@ class Solution {
        {
            if(!vis[i])
            {
-               if(checkCycle(i, vis, adj, -1)) return true;
+               if(foundCycle(i, vis, adj, -1)) return true;
            }
        }
        return false;
