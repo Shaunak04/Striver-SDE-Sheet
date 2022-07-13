@@ -1,28 +1,39 @@
-int fact(int n)
+// block = k/fact
+// add nums[block] to ans, erase from nums
+// k = k%fact
+// fact = fact/nums.size()
+class Solution 
 {
-    if(n>12)
-        return INT_MAX;
-    return (n==1 || n==0) ? 1: n * fact(n - 1);
-}
-
-string Solution::getPermutation(int N, int B) 
-{
-    
-    vector<int> C;
-    for(int i=1;i<=N;i++)
-        C.push_back(i);
-    
-    string ans="";
-    int block;
-    for(int i=0;i<N;i++)
+public:
+    string getPermutation(int n, int k) 
     {
-        int p=fact(N-1-i);
-        block=B/p;
-        if(B%p==0)  
-            block--;
-        ans+=to_string(C[block]);
-        C.erase(C.begin()+block);
-        B=B-(block)*p;
+        int fact = 1;
+        vector<int> number;
+        for(int i=1; i<n; i++)
+        {
+            fact = fact*i;
+            number.push_back(i);
+        }
+        
+        number.push_back(n);
+        string ans = "";
+        k--;
+        // the block is k/fact
+        // then add the answer at number[block] and also erase the number at that index
+        // if empty array break;
+        // k = k%fact, fact = fact/nums.size
+        while(true)
+        {
+            int block = k/fact;
+            ans = ans + to_string(number[block]);
+            number.erase(number.begin() + block);
+            if(number.size()==0)
+            {
+                break;
+            }
+            k = k % fact;
+            fact = fact / number.size();
+        }
+        return ans;
     }
-    return ans;
-}
+};
