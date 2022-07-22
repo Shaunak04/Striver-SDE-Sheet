@@ -17,8 +17,6 @@ class Solution
 	    {
 	        if(indeg[i]==0) q.push(i);
 	    }
-	    bool vis[n];
-	    memset(vis, false, sizeof vis);
 
 	    vector<int> ans;
 	    while(!q.empty())
