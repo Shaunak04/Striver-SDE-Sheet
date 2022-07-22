@@ -1,31 +1,26 @@
-class Solution
+vector<int> Solution::solve(vector<vector<int> > &arr) 
 {
-    public:
-    //Function to merge k sorted arrays.
-    vector<int> mergeKArrays(vector<vector<int>> arr, int k)
+    priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> q; // value {arraynumber, arrayIndex}
+    vector<int> ans;
+    int i;
+    int k = arr.size();
+    for(i=0; i<k; i++)
     {
-        priority_queue<pair<int, pair<int, int>>> q; // value {arraynumber, arrayIndex}
-        vector<int> ans;
-        int i;
-        
-        for(i=0; i<k; i++)
-        {
-           q.push({arr[i][0] *-1, {i , 1}});    
-        }
-        for(i=0; i<k*k; i++)
-        {
-           auto it = q.top();
-           int value = -it.first;
-           int arrayNumber = it.second.first;
-           int arrayIndex = it.second.second;
-           q.pop();
-           ans.push_back(value);
-           if(arrayIndex!=k)
-           {
-               q.push({-arr[arrayNumber][arrayIndex],{arrayNumber , arrayIndex+1}});
-           }
-       }
-       
-       return ans;
+        q.push({arr[i][0], {i , 0}});    
     }
-};
+    int n = arr[0].size();
+    while(!q.empty())
+    {
+        auto it = q.top();
+        int value = it.first;
+        int arrayNumber = it.second.first;
+        int arrayIndex = it.second.second;
+        q.pop();
+        ans.push_back(value);
+        if(arrayIndex!=(n-1))
+        {
+            q.push({arr[arrayNumber][arrayIndex+1],{arrayNumber , arrayIndex+1}});
+        }
+    }
+    return ans;
+}
